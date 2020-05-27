@@ -1,4 +1,3 @@
-/*
 const mongoose = require('mongoose')
 require('dotenv').config()
 
@@ -18,8 +17,9 @@ function connect () {
 module.exports = {
   connect
 }
-*/
 
+
+/*
 const mongoose = require('mongoose')
 
 const DB_USER = 'oariza'
@@ -35,3 +35,4 @@ function connect () {
 module.exports = {
   connect
 }
+*/
