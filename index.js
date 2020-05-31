@@ -4,7 +4,7 @@ const db = require('./src/lib/db')
 async function main () {
   await db.connect()
   console.log('- DB CONNECTED -')
-  server.listen(8082, () => {
+  server.listen(8080, () => {
     console.log('SERVER IS RUNNING')
   })
 }

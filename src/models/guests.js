@@ -25,7 +25,7 @@ const guestsSchema = new mongoose.Schema({
     type: String,
     maxlength: 100,
     required: false
-  },
+  }
 })
 
 module.exports = mongoose.model('Guests', guestsSchema)

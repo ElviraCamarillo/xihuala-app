@@ -1,9 +1,9 @@
 const express = require('express')
 
-const eventRouter = require ('./routes/events')
-const guestsRouter = require ('./routes/guests')
-const expensesRouter = require ('./routes/expenses')
-const budgetsRouter = require ('./routes/budgets')
+const eventRouter = require('./routes/events')
+const guestsRouter = require('./routes/guests')
+const expensesRouter = require('./routes/expenses')
+const budgetsRouter = require('./routes/budgets')
 
 const app = express()
 
