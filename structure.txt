@@ -1,0 +1,41 @@
+Acuerdo de buenas prácticas.
+
+Programas:
+   * Diseño:
+        Figma
+    * Front-end:
+        React.
+        Sass/CCS
+        Javacript
+        HTML5
+        Jquery
+        Bootstrap
+    * Back-End:
+        Node JS
+        Postman
+    *  Bases de datos:
+        Mongo DB
+        Atlas
+    * Servidor:
+        IBMCLoud
+    * Pluggins-VSC
+        Standard
+        Prettier 
+        Auto Close Tag 
+        Code Spell Checker
+        Code Time
+        SASS Variable
+
+    * Marco de trabajo:
+        SCRUM & Xtreme Programing.
+
+Estructura del proyecto:
+
+- Trabajar con componentes reutilizables
+- Usar base de datos no relacional
+- Arquitectura limpia.
+- Identación: 2 espacios.
+- Variables: CamelCase
+- Funciones: upperCamelCase
+- Constantes: Mayúscula
+- Modelos: PascalCase
