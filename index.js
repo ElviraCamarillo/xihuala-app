@@ -1,16 +1,16 @@
 const server = require('./src/server')
-const db = require('./src/lib/db')
+const dataBase = require('./src/lib/db')
 
 async function main () {
-  await db.connect()
-  console.log('- DB CONNECTED -')
+  await dataBase.connect()
+  console.log('Base de datos connectada')
   server.listen(8080, () => {
-    console.log('SERVER IS RUNNING')
+    console.log('El servidor esta corriendo')
   })
 }
 
 main()
   .then(() => {
-    console.log('server ready')
+    console.log('El servidor esta listo')
   })
-  .catch(error => console.error('ERROR: ', error))
+  .catch(error => console.error('Error: ', error))

@@ -1,8 +1,11 @@
 const express = require('express')
 
 const event = require('../usecases/events')
+const auth = require('../middleware/auth')
 
 const router = express.Router()
+
+router.use(auth)
 
 router.get('/', async (req, res) => {
   try {
@@ -94,7 +97,7 @@ router.put('/:id', async (req, res) => {
     })
   } catch (error) {
     res.status(400)
-    res.json ({
+    res.json({
       success: false,
       error: error.message
     })
