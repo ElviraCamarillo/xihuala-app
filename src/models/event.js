@@ -1,32 +1,37 @@
 const mongoose = require('mongoose')
 
-const eventsSchema = new mongoose.Schema({
+const eventSchema = new mongoose.Schema({
   location: {
     type: String,
     minlength: 5,
     maxlength: 100,
     required: true
   },
-  coupleNames: {
+  nameEvent: {
     type: String,
     maxlength: 50,
     required: true
   },
   eventDate: {
-    type: String,
-    maxlength: 10,
-    required: true
+    type: Date
   },
-  timeDate: {
-    type: String,
-    maxlength: 5,
-    required: true
+  eventTime: {
+    type: String
   },
   contactPhone: {
-    type: Number,
+    type: String,
     maxlength: 10,
     required: true
+  },
+  guests: {
+    type: Array
+  },
+  buget: {
+    type: Number
+  },
+  expenses: {
+    type: Array
   }
 })
 
-module.exports = mongoose.model('Events', eventsSchema)
+module.exports = mongoose.model('Events', eventSchema)

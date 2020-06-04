@@ -7,68 +7,73 @@ const router = express.Router()
 
 router.use(auth)
 
-router.get('/', async (req, res) => {
+// GET -> All events
+router.get('/', async (request, response) => {
   try {
     const allEvents = await event.getAllEvents()
-    res.json({
-      message: 'All events',
+    response.json({
+      success: true,
+      message: 'Todos los eventos',
       data: {
         event: allEvents
       }
     })
   } catch (error) {
-    res.status(400)
-    res.json({
+    response.status(400)
+    response.json({
       success: false,
       error: error.message
     })
   }
 })
 
-router.get('/:id', async (req, res) => {
+// GET -> Evet by id
+router.get('/:id', async (request, response) => {
   try {
-    const { id } = req.params
+    const { id } = request.params
     const oneEvent = await event.getEventByID(id)
-    res.json({
+    response.json({
       success: true,
-      message: `get event with id ${id}`,
+      message: `get event with id: ${id}`,
       data: {
         event: oneEvent
       }
     })
   } catch (error) {
-    res.status(400)
-    res.json({
+    response.status(400)
+    response.json({
       success: false,
       error: error.message
     })
   }
 })
 
-router.post('/', async (req, res) => {
+// POST new Event -> Registration flow
+router.post('/', async (request, response) => {
   try {
-    const NewEvent = await event.createEvent(req.body)
-    res.json({
+    const NewEvent = await event.createEvent(request.body)
+    response.json({
       success: true,
-      message: 'New Event',
+      message: 'Add new Event',
       data: {
         event: NewEvent
       }
     })
   } catch (error) {
-    res.status(400)
-    res.json({
+    response.status(400)
+    response.json({
       success: false,
       error: error.message
     })
   }
 })
 
-router.delete('/:id', async (req, res) => {
+// Deleted event by id
+router.delete('/:id', async (request, response) => {
   try {
-    const { id } = req.params
+    const { id } = request.params
     const eventDeleted = await event.deleteEventById(id)
-    res.json({
+    response.json({
       success: true,
       message: `event with id ${id} has been deleted`,
       data: {
@@ -76,19 +81,20 @@ router.delete('/:id', async (req, res) => {
       }
     })
   } catch (error) {
-    res.status(400)
-    res.json({
+    response.status(400)
+    response.json({
       success: false,
       error: error.message
     })
   }
 })
 
-router.put('/:id', async (req, res) => {
+// PUT event by id
+router.put('/:id', async (request, response) => {
   try {
-    const { id } = req.params
-    const eventUpdated = await event.updateEventById(id, req.body)
-    res.json({
+    const { id } = request.params
+    const eventUpdated = await event.updateEventById(id, request.body)
+    response.json({
       success: true,
       message: `Event with id ${id}, has been updated`,
       data: {
@@ -96,8 +102,96 @@ router.put('/:id', async (req, res) => {
       }
     })
   } catch (error) {
-    res.status(400)
-    res.json({
+    response.status(400)
+    response.json({
+      success: false,
+      error: error.message
+    })
+  }
+})
+
+// PUT event update guest
+router.put('/:id/confirmguest', async (request, response) => {
+  try {
+    const { id } = request.params
+    console.log(id, request.body)
+    const eventUpdated = await event.updateGuestByMail(id, request.body)
+    response.json({
+      success: true,
+      message: `Guest with email ${request.body.emailFamily}, has been updated`,
+      data: {
+        eventUpdated
+      }
+    })
+  } catch (error) {
+    response.status(400)
+    response.json({
+      success: false,
+      error: error.message
+    })
+  }
+})
+
+// PUT event a new guest
+router.put('/:id/addguest', async (request, response) => {
+  try {
+    const { id } = request.params
+    console.log(id, request.body)
+    const eventAdded = await event.addEventGuest(id, request.body)
+    response.json({
+      success: true,
+      message: `Guest with email ${request.body.emailFamily}, has added`,
+      data: {
+        eventAdded
+      }
+    })
+  } catch (error) {
+    response.status(400)
+    response.json({
+      success: false,
+      error: error.message
+    })
+  }
+})
+
+// PUT event a new expense
+router.put('/:id/addexpense', async (request, response) => {
+  try {
+    const { id } = request.params
+    console.log(id, request.body)
+    const eventAdded = await event.addExpense(id, request.body)
+    response.json({
+      success: true,
+      message: `Expense  ${request.body.concept}, has added`,
+      data: {
+        eventAdded
+      }
+    })
+  } catch (error) {
+    response.status(400)
+    response.json({
+      success: false,
+      error: error.message
+    })
+  }
+})
+
+// PUT event delete expense
+router.put('/:id/deleteExpense', async (request, response) => {
+  try {
+    const { id } = request.params
+    console.log(id, request.body)
+    const eventAdded = await event.deleteExpense(id, request.body)
+    response.json({
+      success: true,
+      message: `Expense  ${request.body.concept}, has removed`,
+      data: {
+        eventAdded
+      }
+    })
+  } catch (error) {
+    response.status(400)
+    response.json({
       success: false,
       error: error.message
     })
