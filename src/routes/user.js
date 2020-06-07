@@ -128,8 +128,6 @@ router.delete('/:id', async (request, response) => {
   }
 })
 
-
-
 // GET /users
 router.get('/', async (request, response) => {
   try {
