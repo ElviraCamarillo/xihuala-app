@@ -25,7 +25,7 @@ router.get('/validate-session', async (request, response) => {
 })
 
 // /users -> getUserSession()
-router.get('/getsession', async (request, response) => {
+router.get('/ ', async (request, response) => {
   try {
     console.log('enter get session')
     const sessionData = await users.getUserSession(request.headers.authorization)
