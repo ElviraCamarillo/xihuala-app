@@ -1,11 +1,12 @@
 const express = require('express')
 
 const users = require('../usecases/user')
+const auth = require('../middleware/auth')
 
 const router = express.Router()
 
 // /users -> validateSession()
-router.get('/validate-session', async (request, response) => {
+router.get('/validate-session', auth, async (request, response) => {
   try {
     const token = await users.validateSession(request.headers.authorization)
     response.json({
@@ -25,7 +26,7 @@ router.get('/validate-session', async (request, response) => {
 })
 
 // /users -> getUserSession()
-router.get('/ ', async (request, response) => {
+router.get('/getsession', auth, async (request, response) => {
   try {
     console.log('enter get session')
     const sessionData = await users.getUserSession(request.headers.authorization)
@@ -66,7 +67,7 @@ router.post('/signup', async (request, response) => {
 })
 
 // GET an User
-router.get('/:id', async (request, response) => {
+router.get('/:id', auth, async (request, response) => {
   try {
     const { id } = request.params
     const user = await users.getById(id)
@@ -87,7 +88,7 @@ router.get('/:id', async (request, response) => {
 })
 
 // PUT User by id
-router.put('/:id', async (request, response) => {
+router.put('/:id', auth, async (request, response) => {
   try {
     const { id } = request.params
     const userUpdated = await users.updateUserById(id, request.body)
@@ -108,7 +109,7 @@ router.put('/:id', async (request, response) => {
 })
 
 // DELETE/id
-router.delete('/:id', async (request, response) => {
+router.delete('/:id', auth, async (request, response) => {
   try {
     const { id } = request.params
     const userDeleted = await users.deleteById(id)
@@ -129,7 +130,7 @@ router.delete('/:id', async (request, response) => {
 })
 
 // GET /users
-router.get('/', async (request, response) => {
+router.get('/', auth, async (request, response) => {
   try {
     const allUser = await users.getAll()
     response.json({
