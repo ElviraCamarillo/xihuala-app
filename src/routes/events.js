@@ -6,6 +6,27 @@ const auth = require('../middleware/auth')
 const router = express.Router()
 
 router.use(auth)
+// /event -> getByIdUser
+router.get('/user/:id', async (request, response) => {
+  try {
+    var { id } = request.params
+    const eventUserData = await event.getByIdUser(id)
+    console.log('eventUserData', eventUserData)
+    response.json({
+      success: true,
+      message: 'Events by user',
+      data: {
+        events: eventUserData
+      }
+    })
+  } catch (error) {
+    response.status(400)
+    response.json({
+      success: false,
+      message: error.message
+    })
+  }
+})
 
 // GET -> All events
 router.get('/', async (request, response) => {
@@ -68,7 +89,7 @@ router.post('/', async (request, response) => {
   }
 })
 
-// Deleted event by id
+// DELETED event by id
 router.delete('/:id', async (request, response) => {
   try {
     const { id } = request.params

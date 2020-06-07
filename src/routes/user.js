@@ -4,22 +4,43 @@ const users = require('../usecases/user')
 
 const router = express.Router()
 
-// GET /users
-router.get('/', async (request, response) => {
+// /users -> validateSession()
+router.get('/validate-session', async (request, response) => {
   try {
-    const allUser = await users.getAll()
+    const token = await users.validateSession(request.headers.authorization)
     response.json({
-      succes: true,
-      message: 'Lista de usuarios registrados',
+      success: true,
+      message: 'Session Validated',
       data: {
-        users: allUser
+        token
       }
     })
   } catch (error) {
-    response.status(404)
+    response.status(401)
     response.json({
-      succes: false,
-      error: error.message
+      success: false,
+      message: 'Invalid session'
+    })
+  }
+})
+
+// /users -> getUserSession()
+router.get('/getsession', async (request, response) => {
+  try {
+    console.log('enter get session')
+    const sessionData = await users.getUserSession(request.headers.authorization)
+    response.json({
+      success: true,
+      message: 'data Session ',
+      data: {
+        session: sessionData
+      }
+    })
+  } catch (error) {
+    response.status(401)
+    response.json({
+      success: false,
+      message: 'Invalid session'
     })
   }
 })
@@ -44,7 +65,7 @@ router.post('/signup', async (request, response) => {
   }
 })
 
-// GET one User
+// GET an User
 router.get('/:id', async (request, response) => {
   try {
     const { id } = request.params
@@ -57,9 +78,30 @@ router.get('/:id', async (request, response) => {
       }
     })
   } catch (error) {
-    response.status(404)
+    response.status(400)
     response.json({
       succes: false,
+      error: error.message
+    })
+  }
+})
+
+// PUT User by id
+router.put('/:id', async (request, response) => {
+  try {
+    const { id } = request.params
+    const userUpdated = await users.updateUserById(id, request.body)
+    response.json({
+      success: true,
+      message: `User with id ${id}, has been updated`,
+      data: {
+        userUpdated
+      }
+    })
+  } catch (error) {
+    response.status(400)
+    response.json({
+      success: false,
       error: error.message
     })
   }
@@ -78,7 +120,29 @@ router.delete('/:id', async (request, response) => {
       }
     })
   } catch (error) {
-    response.status(404)
+    response.status(400)
+    response.json({
+      succes: false,
+      error: error.message
+    })
+  }
+})
+
+
+
+// GET /users
+router.get('/', async (request, response) => {
+  try {
+    const allUser = await users.getAll()
+    response.json({
+      succes: true,
+      message: 'Lista de usuarios registrados',
+      data: {
+        users: allUser
+      }
+    })
+  } catch (error) {
+    response.status(400)
     response.json({
       succes: false,
       error: error.message

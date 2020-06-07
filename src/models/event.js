@@ -31,6 +31,10 @@ const eventSchema = new mongoose.Schema({
   },
   expenses: {
     type: Array
+  },
+  idUser: {
+    type: String,
+    required: true
   }
 })
 
