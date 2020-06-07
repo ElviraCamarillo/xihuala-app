@@ -1,0 +1,5 @@
+applications:
+- name: xihuala-app-api
+  random-route: false
+  memory: 128M
+  force_https: true
