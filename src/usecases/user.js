@@ -47,10 +47,34 @@ function deleteById (id) {
   return User.findByIdAndRemove(id)
 }
 
+// UPDATE user by Id
+function updateUserById (id, NewUserData) {
+  return User.findByIdAndUpdate(id, NewUserData)
+}
+
+// Validate sesion
+function validateSession (token) {
+  const { id } = jwt.verify(token)
+  return jwt.sign({ id })
+}
+
+// Get session
+async function getUserSession (token) {
+  const { id } = jwt.verify(token)
+  const finded = await User.findOne({ _id: id })
+  const dataSession = {
+    user: finded
+  }
+  return dataSession
+}
+
 module.exports = {
   getAll,
   signup,
   login,
   getById,
-  deleteById
+  deleteById,
+  validateSession,
+  getUserSession,
+  updateUserById
 }
