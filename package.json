@@ -4,7 +4,8 @@
   "description": "Xihuala Back-End",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "author": "@Elvira Camarillo @Omar Araiza @Raquel Cruz",
   "license": "ISC",
