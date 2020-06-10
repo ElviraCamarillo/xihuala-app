@@ -7,7 +7,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 const router = express.Router()
 
-router.use(auth)
+//router.use(auth)
 // /event -> getByIdUser
 router.get('/user/:id', async (request, response) => {
   try {
@@ -54,6 +54,7 @@ router.get('/', async (request, response) => {
 router.get('/:id', async (request, response) => {
   try {
     const { id } = request.params
+    console.log('id event api', id)
     const oneEvent = await event.getEventByID(id)
     response.json({
       success: true,
@@ -137,7 +138,7 @@ router.put('/:id', async (request, response) => {
 router.put('/:id/confirmguest', async (request, response) => {
   try {
     const { id } = request.params
-    console.log(id, request.body)
+    console.log('confirm', id, request.body)
     const eventUpdated = await event.updateGuestByMail(id, request.body)
     response.json({
       success: true,
@@ -173,7 +174,7 @@ router.put('/:id/addguest', async (request, response) => {
         <p>Ubicación: <strong>${location}</strong></p>
         <p>Fecha: <strong>${eventDate}</strong> a las <strong>${eventTime}</strong>hrs </p>
         <p>Por favor confirma tu asistencia</p>
-        <a href='http://localhost:3000/events/confirm/i${id}?email=${request.body.emailFamily}'>Confirmar</a>
+        <a href='http://localhost:3000/event/${id}/confirm?email=${request.body.emailFamily}'>Confirmar</a>
       `
     }
     sgMail.send(msg)

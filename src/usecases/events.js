@@ -35,6 +35,7 @@ function updateEventById (id, NewEventData) {
 // UPDATE one guest of event by mail
 function updateGuestByMail (idEvent, NewGuestData) {
   const { emailFamily, note, status } = NewGuestData
+  console.log(emailFamily, note, status)
   return Event.update(
     {
       _id: idEvent,
