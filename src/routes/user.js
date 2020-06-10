@@ -6,7 +6,7 @@ const auth = require('../middleware/auth')
 const router = express.Router()
 
 // /users -> validateSession()
-router.get('/validate-session', auth, async (request, response) => {
+router.get('/validate-session', async (request, response) => {
   try {
     const token = await users.validateSession(request.headers.authorization)
     response.json({
@@ -26,7 +26,7 @@ router.get('/validate-session', auth, async (request, response) => {
 })
 
 // /users -> getUserSession()
-router.get('/getsession', auth, async (request, response) => {
+router.get('/getsession', async (request, response) => {
   try {
     console.log('enter get session')
     const sessionData = await users.getUserSession(request.headers.authorization)

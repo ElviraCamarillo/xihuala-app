@@ -2,6 +2,8 @@ const express = require('express')
 
 const event = require('../usecases/events')
 const auth = require('../middleware/auth')
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 const router = express.Router()
 
@@ -159,6 +161,22 @@ router.put('/:id/addguest', async (request, response) => {
     const { id } = request.params
     console.log(id, request.body)
     const eventAdded = await event.addEventGuest(id, request.body)
+    const infoEvent = await event.getEventByID(id)
+    var { nameEvent, eventDate, eventTime, location } = infoEvent
+    const msg = {
+      to: request.body.emailFamily,
+      from: 'xihualaapp@gmail.com',
+      subject: `Te han invitado al evento ${nameEvent}`,
+      text: 'Te han invitado a un evento',
+      html: `
+        <strong>Te han invitado al evento ${nameEvent}</strong>
+        <p>Ubicación: <strong>${location}</strong></p>
+        <p>Fecha: <strong>${eventDate}</strong> a las <strong>${eventTime}</strong>hrs </p>
+        <p>Por favor confirma tu asistencia</p>
+        <a href='http://localhost:3000/events/confirm/i${id}?email=${request.body.emailFamily}'>Confirmar</a>
+      `
+    }
+    sgMail.send(msg)
     response.json({
       success: true,
       message: `Guest with email ${request.body.emailFamily}, has added`,
