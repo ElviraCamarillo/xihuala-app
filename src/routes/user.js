@@ -88,7 +88,7 @@ router.get('/:id', auth, async (request, response) => {
 })
 
 // PUT User by id
-router.put('/:id', auth, async (request, response) => {
+router.patch('/:id', auth, async (request, response) => {
   try {
     const { id } = request.params
     const userUpdated = await users.updateUserById(id, request.body)
