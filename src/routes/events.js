@@ -164,6 +164,7 @@ router.put('/:id/addguest', async (request, response) => {
     const eventAdded = await event.addEventGuest(id, request.body)
     const infoEvent = await event.getEventByID(id)
     var { nameEvent, eventDate, eventTime, location } = infoEvent
+
     const msg = {
       to: request.body.emailFamily,
       from: 'xihualaapp@gmail.com',
@@ -224,7 +225,7 @@ router.put('/:id/deleteExpense', async (request, response) => {
     const eventAdded = await event.deleteExpense(id, request.body)
     response.json({
       success: true,
-      message: `Expense  ${request.body.concept}, has removed`,
+      message: `Expense  ${request.body.expenseDescription}, has removed`,
       data: {
         eventAdded
       }

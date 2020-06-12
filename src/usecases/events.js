@@ -66,12 +66,12 @@ function addEventGuest (idEvent, guestData) {
 
 // DELETE expense
 function deleteExpense (idEvent, expenseData) {
-  const { concept } = expenseData
+  const { expenseDescription } = expenseData
   return Event.update(
     { _id: idEvent },
     {
       $pull: {
-        expenses: { concept: concept }
+        expenses: { expenseDescription: expenseDescription }
       }
     },
     {
