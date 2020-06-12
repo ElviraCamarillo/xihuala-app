@@ -1,13 +1,13 @@
 const express = require('express')
 
 const event = require('../usecases/events')
-const auth = require('../middleware/auth')
+// const auth = require('../middleware/auth')
 const sgMail = require('@sendgrid/mail')
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 const router = express.Router()
 
-//router.use(auth)
+// router.use(auth)
 // /event -> getByIdUser
 router.get('/user/:id', async (request, response) => {
   try {
@@ -174,7 +174,7 @@ router.put('/:id/addguest', async (request, response) => {
         <p>Ubicación: <strong>${location}</strong></p>
         <p>Fecha: <strong>${eventDate}</strong> a las <strong>${eventTime}</strong>hrs </p>
         <p>Por favor confirma tu asistencia</p>
-        <a href='http://localhost:3000/event/${id}/confirm?email=${request.body.emailFamily}'>Confirmar</a>
+        <a href='http://xihuala-app.mybluemix.net/event/${id}/confirm?email=${request.body.emailFamily}'>Confirmar</a>
       `
     }
     sgMail.send(msg)
