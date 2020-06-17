@@ -10,6 +10,7 @@ const router = express.Router()
 const sgMail = require('@sendgrid/mail')
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
+
 const crypto = require('crypto')
 const secret = 'abcdfgh'
 const algorithmCrypto = 'sha256'
@@ -67,7 +68,8 @@ router.post('/signup', async (request, response) => {
     console.log('has new user', hash)
 
     const newUser = await users.signup(request.body)
-    const msg = {
+    console.log('new user response', newUser)
+    const msgNewUser = {
       to: newUser.email,
       from: 'xihualapp@gmail.com',
       subject: 'Bienvenido a Xihuala App',
@@ -89,8 +91,7 @@ router.post('/signup', async (request, response) => {
         </table >
       `
     }
-    sgMail.send(msg)
-
+    sgMail.send(msgNewUser)
     response.json({
       success: true,
       message: 'The user has been registered',
