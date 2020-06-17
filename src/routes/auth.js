@@ -10,7 +10,7 @@ router.post('/login', async (request, response) => {
     const token = await users.login(email, password)
 
     response.json({
-      sucess: true,
+      success: true,
       message: 'Loged in',
       data: {
         token
@@ -19,7 +19,7 @@ router.post('/login', async (request, response) => {
   } catch (error) {
     response.status(400)
     response.json({
-      sucess: false,
+      success: false,
       error: error.message
     })
   }

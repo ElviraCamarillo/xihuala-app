@@ -29,7 +29,9 @@ async function signup (newUserData) {
 // Fuction for user login.
 async function login (email, password) {
   const user = await User.findOne({ email })
+  console.log('user on login', user)
   if (!user) throw new Error('El email que no esta registrado')
+  if (!user.isVerified) throw new Error('El correo electrónico no se ha valid')
 
   const isPasswordCorrect = await bcrypt.compare(password, user.password)
   if (!isPasswordCorrect) throw new Error('Datos invalidos')
@@ -68,6 +70,20 @@ async function getUserSession (token) {
   return dataSession
 }
 
+// get session
+async function validateMail (hash) {
+  console.log('use case hash', hash)
+  const finded = await User.findOneAndUpdate(
+    { token: hash },
+    { isVerified: true }
+  )
+  const dataSession = {
+    user: finded
+  }
+  console.log(dataSession)
+  return dataSession
+}
+
 module.exports = {
   getAll,
   signup,
@@ -76,5 +92,6 @@ module.exports = {
   deleteById,
   validateSession,
   getUserSession,
-  updateUserById
+  updateUserById,
+  validateMail
 }
