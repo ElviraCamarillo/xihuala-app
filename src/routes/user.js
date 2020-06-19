@@ -75,7 +75,7 @@ router.post('/signup', async (request, response) => {
       html:
       `
         <table align="center" style="max-width: 400px; margin-left: auto; margin-right: auto">
-          <tbody >
+          <tbody style="font-family: sans-serif, Helvetica, Arial !important">
           <table align="center" cellpadding="0" cellspacing="0" style="Margin: 0 auto; width: 100%; max-width: 640px;" role="Invite">
             <tr>
               <td align="center" style="padding-top: 46px; padding-bottom: 30px; background-color: #F8F5F4;">

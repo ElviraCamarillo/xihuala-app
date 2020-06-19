@@ -30,8 +30,8 @@ async function signup (newUserData) {
 async function login (email, password) {
   const user = await User.findOne({ email })
   console.log('user on login', user)
-  if (!user) throw new Error('El email que no esta registrado')
-  if (!user.isVerified) throw new Error('El correo electrónico no se ha valid')
+  if (!user) throw new Error('El email no está registrado')
+  if (!user.isVerified) throw new Error('El correo electrónico no ha sido validado')
 
   const isPasswordCorrect = await bcrypt.compare(password, user.password)
   if (!isPasswordCorrect) throw new Error('Datos invalidos')
