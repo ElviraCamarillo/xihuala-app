@@ -171,6 +171,8 @@ router.put('/:id/addguest', async (request, response) => {
       subject: `Te han invitado al evento ${nameEvent}`,
       text: 'Te han invitado a un evento',
       html: `
+
+      
         <strong>Te han invitado al evento ${nameEvent}</strong>
         <p>Ubicación: <strong>${location}</strong></p>
         <p>Fecha: <strong>${eventDate}</strong> a las <strong>${eventTime}</strong>hrs </p>
