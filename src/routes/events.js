@@ -205,7 +205,7 @@ router.put('/:id/addguest', async (request, response) => {
               <p style="padding: 0; margin: 0; line-height: 22px; font-size: 25px; color: rgba(0,0,0,0.87);; margin-bottom: 45px;font-family: sans-serif">${dateComponent}</p>
               <p style="padding: 0; margin: 0; line-height: 22px; font-size: 25px; color: rgba(0,0,0,0.87);; margin-bottom: 45px;font-family: sans-serif">${eventTime}hrs</p>
               <p style="padding: 0; margin: 0; line-height: 22px; font-size: 25px; color: rgba(0,0,0,0.87);; margin-bottom: 45px;font-family: sans-serif">${location}</p>
-              <a style="height: 50px; width: 200px; border-radius: .5rem;border: none; line-height: 3rem; color: #F8F5F4; font-size: 15px;font-family: sans-serif" href='http://xihuala-app.mybluemix.net/event/${id}/confirm?email=${request.body.emailFamily}'>Confirmar</a>
+              <a style="height: 50px; width: 200px; border-radius: .5rem;border: none; line-height: 3rem; color: color: #7342BF , background: #7342BF; font-size: 15px;font-family: sans-serif" href='http://xihuala-app.mybluemix.net/event/${id}/confirm?email=${request.body.emailFamily}'>Confirmar</a>
             </td>
           </tr>
 
